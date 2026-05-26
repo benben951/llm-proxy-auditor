@@ -1,0 +1,39 @@
+[project]
+name = "llm-proxy-auditor"
+version = "0.1.0"
+description = "Audit OpenAI-compatible LLM proxies for tampering, model substitution, and Agent-safety risks."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "benben951" }]
+keywords = ["llm", "openai", "proxy", "security", "audit", "agent"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Security",
+  "Topic :: Software Development :: Testing",
+]
+
+[project.urls]
+Homepage = "https://github.com/benben951/llm-proxy-auditor"
+Repository = "https://github.com/benben951/llm-proxy-auditor"
+Issues = "https://github.com/benben951/llm-proxy-auditor/issues"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+proxy-auditor = "proxy_auditor.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
