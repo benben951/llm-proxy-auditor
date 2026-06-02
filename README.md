@@ -1,5 +1,7 @@
 # LLM Proxy Auditor
 
+[![CI](https://github.com/benben951/llm-proxy-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/benben951/llm-proxy-auditor/actions/workflows/ci.yml)
+
 Audit OpenAI-compatible LLM API gateways for model substitution, prompt tampering, response rewriting, privacy leakage, and agent-safety risks.
 
 ## Portfolio Snapshot
@@ -22,6 +24,12 @@ An OpenAI-compatible proxy can theoretically:
 - log sensitive data such as code, documents, or workflow context
 
 `llm-proxy-auditor` sends deterministic probes and produces a trust-oriented report instead of leaving this as a vague feeling.
+
+## Example Trust Report
+
+![Example trust report preview](assets/trust_report_preview.png)
+
+See [examples/trust_report_example.md](examples/trust_report_example.md) for the corresponding sample report.
 
 ## Features
 
@@ -79,8 +87,6 @@ Findings:
 - Response contained unexpected wrapper text.
 - Tool-call compatibility not tested in this MVP.
 ```
-
-See [examples/trust_report_example.md](examples/trust_report_example.md) for a sample report.
 
 ## Limits
 
