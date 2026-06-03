@@ -7,7 +7,7 @@ from pathlib import Path
 from .client import OpenAICompatClient
 from .probes import PROBE_NAMES, run_all_probes
 from .report import write_json_report, write_markdown_report
-from .scoring import score_results
+from .scoring import describe_scoring, score_results
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -16,6 +16,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     list_probes = sub.add_parser("list-probes", help="List probes included in this version.")
     list_probes.set_defaults(handler=run_list_probes)
+
+    explain_scoring = sub.add_parser("explain-scoring", help="Explain risk weights and agent-safety thresholds.")
+    explain_scoring.set_defaults(handler=run_explain_scoring)
 
     audit = sub.add_parser("audit", help="Run proxy trust probes.")
     audit.add_argument("--base-url", required=True, help="OpenAI-compatible base URL, for example https://host/v1")
@@ -47,6 +50,12 @@ def run_list_probes(args: argparse.Namespace) -> int:
     del args
     for name in PROBE_NAMES:
         print(name)
+    return 0
+
+
+def run_explain_scoring(args: argparse.Namespace) -> int:
+    del args
+    print(describe_scoring())
     return 0
 
 

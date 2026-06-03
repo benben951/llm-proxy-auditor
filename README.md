@@ -12,6 +12,13 @@ This project is a lightweight security and trust tool for people who route agent
 - Core evidence: deterministic probe design, structured scoring, Markdown trust reports, and regression tests
 - Practical question: can this proxy be trusted enough for Codex, Claude Code, browser agents, or internal workflows?
 
+## What This Demonstrates
+
+- AI evaluation beyond generic prompt testing: probes are tied to agent failure modes.
+- Trust-boundary thinking: proxy gateways are treated as infrastructure risk, not just cheaper API endpoints.
+- Evidence artifacts: audits produce Markdown and JSON reports that can be reviewed, archived, or used in CI.
+- Safety discipline: probes use synthetic canaries and fake secrets instead of real sensitive data.
+
 ## Why It Matters
 
 An OpenAI-compatible proxy can theoretically:
@@ -30,6 +37,24 @@ An OpenAI-compatible proxy can theoretically:
 ![Example trust report preview](assets/trust_report_preview.png)
 
 See [examples/trust_report_example.md](examples/trust_report_example.md) for the corresponding sample report.
+
+## How It Works
+
+```text
+OpenAI-compatible endpoint
+        |
+        v
+deterministic probes
+        |
+        v
+probe results + evidence snippets
+        |
+        v
+weighted risk scoring
+        |
+        v
+Markdown / JSON trust report
+```
 
 ## Features
 
@@ -57,6 +82,12 @@ List probes:
 python -m proxy_auditor list-probes
 ```
 
+Explain scoring:
+
+```powershell
+python -m proxy_auditor explain-scoring
+```
+
 Run an audit:
 
 ```powershell
@@ -65,6 +96,16 @@ python -m proxy_auditor audit `
   --api-key "$env:PROXY_API_KEY" `
   --model "gpt-4o-mini" `
   --out "trust_report.md"
+```
+
+Use it as a CI gate:
+
+```powershell
+python -m proxy_auditor audit `
+  --base-url "$env:PROXY_BASE_URL" `
+  --api-key "$env:PROXY_API_KEY" `
+  --model "$env:PROXY_MODEL" `
+  --fail-on high
 ```
 
 ## Output
@@ -94,6 +135,12 @@ Findings:
 - It cannot perfectly identify the real underlying model.
 - It does not replace legal, vendor, or enterprise security review.
 - It should only be used with synthetic canaries and fake secrets, never real confidential data.
+
+## Project Notes
+
+- [Case study](docs/CASE_STUDY.md)
+- [Scoring model](docs/SCORING_MODEL.md)
+- [Agent safety playbook](docs/AGENT_SAFETY_PLAYBOOK.md)
 
 ## Development
 

@@ -8,6 +8,15 @@ def test_list_probes(capsys):
     assert "basic_connectivity" in capsys.readouterr().out
 
 
+def test_explain_scoring(capsys):
+    code = main(["explain-scoring"])
+
+    assert code == 0
+    out = capsys.readouterr().out
+    assert "Severity weights" in out
+    assert "CRITICAL" in out
+
+
 def test_should_fail_respects_threshold():
     assert _should_fail("HIGH", "high")
     assert _should_fail("CRITICAL", "high")
