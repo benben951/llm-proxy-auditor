@@ -31,6 +31,9 @@ dev = ["pytest>=8.0"]
 [project.scripts]
 proxy-auditor = "proxy_auditor.cli:main"
 
+[tool.setuptools]
+packages = ["proxy_auditor"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
